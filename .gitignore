@@ -1,0 +1,5 @@
+*.exe
+.vscode
+.DS_Store
+a.out
+Контролно 2
