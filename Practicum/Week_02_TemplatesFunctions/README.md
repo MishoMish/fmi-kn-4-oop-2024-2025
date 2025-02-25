@@ -13,9 +13,9 @@
 ```cpp
 int main(){
     int arr1[5] = {1, 5, 3, 9, 2};
-    std::cout << findMax(arr, 5); // -> 9
+    std::cout << findMax(arr1, 5); // -> 9
     double arr2[4] = {2.5, 7.1, 3.3, 5.0};
-    std::cout << findMax(arr, 4); // -> 7.1
+    std::cout << findMax(arr2, 4); // -> 7.1
 }
 
 ```
@@ -32,10 +32,10 @@ int main(){
 ```cpp
 int main(){
     int arr1[5] = {1, 5, 3, 9, 2};
-    sort(arr, 5);
+    sort(arr1, 5);
     printArr(arr1);  // -> 1 2 3 5 9
     double arr2[4] = {2.5, 7.1, 3.3, 5.0};
-    sort(arr, 4);
+    sort(arr2, 4);
     printArr(arr2);  // -> 2.5 3.3 5.0 7.1
 }
 
@@ -56,9 +56,9 @@ int main(){
 
 int main(){
     double a = 10.3, b = 6.0;
-    cout<< apply(abs, a, b) << endl; // -> 4.3 
+    cout<< apply(absDifference, a, b) << endl; // -> 4.3 
     int c = 3, d = 7;
-    cout<< apply(abs, c, d) << endl; // -> 4
+    cout<< apply(absDifference, c, d) << endl; // -> 4
 }
 
 ```
