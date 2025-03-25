@@ -27,7 +27,6 @@ class A{
         cout<<"~A()"<<endl;
     }
 };
-
 class B{
     int m_num;
     A m_a;
@@ -68,21 +67,8 @@ class Message{
     char* message;
     char* user;
     int timestamp;
-
-public:
-
-    Message() = delete;
-    
-    Message(char* message, char* user){
-        this->message = new char[strlen(message)+1];
-        strcpy(this->message,message);
-        
-        this->user = new char[strlen(user)+1];
-        strcpy(this->user,user);
-
-        timestamp = duration_cast<::milliseconds>( system_clock::now().time_since_epoch() ).count(); 
-    }
-    Message(char* message, char* user, int timestamp){
+    private:
+    void copy(const char* message,const char* user, int timestamp){
         this->message = new char[strlen(message)+1];
         strcpy(this->message,message);
         
@@ -91,23 +77,38 @@ public:
         
         this->timestamp = timestamp;
     }
+    void free(){
+        delete[] message;
+        delete[] user;
+    }
+public:
+
+    Message() = delete;
+    
+    Message(const char* message, const char* user){
+        copy(message,user,0);
+    }
+    Message(const char* message, const char* user, int timestamp){
+       copy(message,user,timestamp);
+    }
     Message(const Message& other){
-        this->message = new char[strlen(other.message)+1];
-        strcpy(this->message,other.message);
-        
-        this->user = new char[strlen(other.user)+1];
-        strcpy(this->user,other.user);
-        
-        this->timestamp = other.timestamp;
+        copy(other.message,other.user,other.timestamp);
     }
 
+    Message& operator=(const Message& other){
+        if(this != &other)// this == &other
+        {
+            free();
+            copy(other.message,other.user,other.timestamp);
+        }
+        return *this;
+    }
     void print(){
         cout<<user<<": "<<message<<endl;
     }
 
     ~Message(){
-        delete[] message;
-        delete[] user;
+        free();  
     }   
 };
 
